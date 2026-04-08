@@ -1,0 +1,75 @@
+{
+  "name": "trino-best-practices",
+  "version": "1.0.0",
+  "organization": "OpenAI Codex",
+  "date": "2026-04-08",
+  "license": "Apache-2.0",
+  "trinoVersion": "Current documentation baseline: 480",
+  "abstract": "Atomic, review-first best practices for Trino SQL, plan analysis, connector-aware tuning, and Hive/Iceberg/Lakehouse troubleshooting. The package teaches agents to read plans first, preserve pushdown and pruning, reason about dynamic filtering and join distribution, and separate engine behavior from connector-specific behavior.",
+  "references": [
+    {
+      "name": "Trino documentation root",
+      "url": "https://trino.io/docs/current/"
+    },
+    {
+      "name": "SELECT",
+      "url": "https://trino.io/docs/current/sql/select.html"
+    },
+    {
+      "name": "EXPLAIN",
+      "url": "https://trino.io/docs/current/sql/explain.html"
+    },
+    {
+      "name": "EXPLAIN ANALYZE",
+      "url": "https://trino.io/docs/current/sql/explain-analyze.html"
+    },
+    {
+      "name": "Pushdown",
+      "url": "https://trino.io/docs/current/optimizer/pushdown.html"
+    },
+    {
+      "name": "Cost-based optimizations",
+      "url": "https://trino.io/docs/current/optimizer/cost-based-optimizations.html"
+    },
+    {
+      "name": "Dynamic filtering",
+      "url": "https://trino.io/docs/current/admin/dynamic-filtering.html"
+    },
+    {
+      "name": "Hive connector",
+      "url": "https://trino.io/docs/current/connector/hive.html"
+    },
+    {
+      "name": "Iceberg connector",
+      "url": "https://trino.io/docs/current/connector/iceberg.html"
+    },
+    {
+      "name": "Lakehouse connector",
+      "url": "https://trino.io/docs/current/connector/lakehouse.html"
+    },
+    {
+      "name": "Fault-tolerant execution",
+      "url": "https://trino.io/docs/current/admin/fault-tolerant-execution.html"
+    },
+    {
+      "name": "Spill to disk",
+      "url": "https://trino.io/docs/current/admin/spill.html"
+    },
+    {
+      "name": "Conversion functions",
+      "url": "https://trino.io/docs/current/functions/conversion.html"
+    },
+    {
+      "name": "String functions",
+      "url": "https://trino.io/docs/current/functions/string.html"
+    },
+    {
+      "name": "Binary functions",
+      "url": "https://trino.io/docs/current/functions/binary.html"
+    },
+    {
+      "name": "Connectors overview",
+      "url": "https://trino.io/docs/current/connector.html"
+    }
+  ]
+}
