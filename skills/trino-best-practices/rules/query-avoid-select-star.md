@@ -16,7 +16,7 @@ alwaysApply: false
 
 ### Why it matters
 
-Projection pushdown lets the connector read only required columns. `SELECT *` removes that advantage and can also pull hidden metadata or awkwardly typed columns into the query path when you only needed a few business fields.
+Projection pushdown lets the connector read only required columns. `SELECT *` removes that advantage and pulls every declared table column, including ordinary partition columns that are part of the schema. Hidden metadata columns such as `"$path"` or `"$file_modified_time"` still require explicit selection.
 
 ### How to detect
 
@@ -47,11 +47,10 @@ The scan now has to consider every column, even if the consumer only needs four 
 ### Fix
 
 - Enumerate required columns explicitly.
-- Add hidden metadata columns such as `"$path"` only when diagnosing storage behavior.
+- Add hidden metadata columns such as `"$path"` only when diagnosing storage behavior, since `SELECT *` does not include them automatically.
 - Treat `SELECT *` as debugging-only unless the full row is genuinely required.
 
 ### Reference
 
 - https://trino.io/docs/current/optimizer/pushdown.html
 - https://trino.io/docs/current/sql/select.html
-

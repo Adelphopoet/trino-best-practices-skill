@@ -158,7 +158,8 @@ Typed columns should meet typed literals. Do not stringify dates, timestamps, nu
 
 **Fix**
 
-- Use `DATE '...'`, `TIMESTAMP '...'`, `BIGINT '...'`, and other typed literals.
+- Use documented typed literals such as `DATE '...'`, `TIMESTAMP '...'`, `UUID '...'`, and `DECIMAL '...'` where they exist.
+- For numeric parameters, prefer numeric literals or an explicit `CAST(... AS bigint)` / `CAST(... AS integer)` at the boundary.
 - Cast external parameters once outside the scan path if needed.
 
 **Reference**
@@ -203,7 +204,8 @@ Function-wrapped scan columns are pruning risks unless the function exactly matc
 **Why**
 
 - Projection pushdown works best when the query names the needed columns.
-- Wide Hive and Iceberg tables can carry columns you do not want in the scan path.
+- Wide Hive and Iceberg tables can carry declared columns you do not want in the scan path, including ordinary partition columns that are part of the schema.
+- Hidden metadata columns such as `"$path"` still need explicit selection; `SELECT *` does not pull them in automatically.
 
 **Detect**
 
@@ -213,7 +215,7 @@ Function-wrapped scan columns are pruning risks unless the function exactly matc
 **Fix**
 
 - Enumerate needed columns.
-- Add hidden metadata columns only for diagnosis.
+- Add hidden metadata columns only for diagnosis, since `SELECT *` does not include them automatically.
 
 **Reference**
 

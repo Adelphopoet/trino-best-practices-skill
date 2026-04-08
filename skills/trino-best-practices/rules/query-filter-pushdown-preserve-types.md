@@ -30,7 +30,7 @@ Predicate pushdown is connector-specific, but Trino makes it visible in the plan
 SELECT orderkey, totalprice
 FROM iceberg.sales.orders
 WHERE orderdate >= DATE '2026-04-01'
-  AND custkey = BIGINT '12345';
+  AND custkey = 12345;
 ```
 
 The predicate stays in the column's native type, which is the cleanest pushdown shape.
@@ -48,7 +48,8 @@ This pushes coercion into the scan path and makes connector pushdown less likely
 
 ### Fix
 
-- Use typed literals such as `DATE '...'`, `TIMESTAMP '...'`, `BIGINT '...'`.
+- Use documented typed literals such as `DATE '...'`, `TIMESTAMP '...'`, `UUID '...'`, and `DECIMAL '...'` where they exist.
+- For numeric parameters, prefer numeric literals or an explicit `CAST(... AS bigint)` / `CAST(... AS integer)` at the boundary.
 - Preserve the column type in the predicate.
 - If incoming parameters are text, cast them once outside the scan path.
 
@@ -56,4 +57,3 @@ This pushes coercion into the scan path and makes connector pushdown less likely
 
 - https://trino.io/docs/current/optimizer/pushdown.html
 - https://trino.io/docs/current/functions/conversion.html
-

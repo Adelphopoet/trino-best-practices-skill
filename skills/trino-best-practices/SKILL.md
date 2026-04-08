@@ -47,8 +47,12 @@ Read these first:
 8. `rules/join-choose-distribution.md`
 9. `rules/join-filter-before-join.md`
 10. `rules/join-watch-row-explosion.md`
-11. `rules/types-avoid-implicit-mismatch.md`
-12. `rules/cte-dont-assume-materialization.md`
+11. `rules/join-use-semi-join-patterns.md`
+12. `rules/types-avoid-implicit-mismatch.md`
+13. `rules/types-varbinary-varchar-awareness.md`
+14. `rules/anti-pattern-cast-on-join-key.md`
+15. `rules/anti-pattern-date-wrap-breaks-pruning.md`
+16. `rules/cte-dont-assume-materialization.md`
 
 Check for:
 
@@ -67,7 +71,8 @@ Read these first:
 2. `rules/plan-explain-read-fragments.md`
 3. `rules/plan-dynamic-filter-recognition.md`
 4. `rules/join-choose-distribution.md`
-5. `rules/session-query-shape-over-tuning.md`
+5. `rules/anti-pattern-late-filtering.md`
+6. `rules/session-query-shape-over-tuning.md`
 
 Check for:
 
