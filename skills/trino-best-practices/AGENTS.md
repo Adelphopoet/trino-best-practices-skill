@@ -9,7 +9,7 @@ Documentation baseline: Trino current docs (480)
 
 ## Abstract
 
-This reference manual teaches agents how to review Trino SQL, plans, connector choices, and execution settings without falling back to generic warehouse folklore. The emphasis is review-first: inspect SQL, `EXPLAIN`, connector semantics, table layout, and session settings before recommending changes. Connector behavior matters. File format matters. Query shape matters more than blind tuning.
+This reference manual teaches agents how to review Trino SQL, plans, connector choices, and execution settings without falling back to generic warehouse folklore. The emphasis is review-first: inspect SQL, `EXPLAIN`, connector semantics, table layout, and performance-related session settings before recommending changes. Connector behavior matters. File format matters. Query shape matters more than blind tuning. Hive and Iceberg are first-class in this package. Lakehouse is covered as a routing layer, with full connector-specific guidance only when the underlying table type is Hive or Iceberg.
 
 ---
 
@@ -71,6 +71,7 @@ Use this order:
 5. Decide whether the issue belongs to SQL shape, table design, file layout, catalog configuration, or session configuration.
 6. Cite rule names in the final review.
 7. State uncertainty explicitly if connector or version detail is missing.
+8. If a Lakehouse table is `DELTA` or `HUDI`, use the boundary rule, keep the review limited to generic SQL / plan / session evidence, and say the package does not provide deeper format-specific guidance for that table type.
 
 ---
 
@@ -715,7 +716,8 @@ Lakehouse combines multiple connector behaviors. It does not erase them.
 **Fix**
 
 - Identify table type first.
-- Route the analysis to the underlying connector semantics.
+- Route Hive tables to Hive rules and Iceberg tables to Iceberg rules.
+- If the table type is `DELTA` or `HUDI`, stop at wrapper-boundary guidance plus generic SQL / plan / session rules from this package.
 
 **Reference**
 

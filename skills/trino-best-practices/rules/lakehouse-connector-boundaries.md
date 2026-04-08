@@ -51,11 +51,11 @@ That is made up.
 ### Fix
 
 - Identify the table type first.
-- Route Hive tables to Hive rules, Iceberg tables to Iceberg rules, and so on.
+- Route Hive tables to Hive rules and Iceberg tables to Iceberg rules.
+- If the table type is `DELTA` or `HUDI`, state that this package only provides wrapper-boundary guidance for those formats and avoid inventing deeper connector-specific behavior.
 - Mention uncertainty if the table type is not visible.
 
 ### Reference
 
 - https://trino.io/docs/current/connector/lakehouse.html
 - https://trino.io/docs/current/connector.html
-
