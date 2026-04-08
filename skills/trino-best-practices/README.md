@@ -1,6 +1,6 @@
 # trino-best-practices
 
-`trino-best-practices` is a production-ready `SKILL.md` package for agents that need to review Trino SQL, read Trino plans, and troubleshoot Hive, Iceberg, and Lakehouse workloads without giving generic warehouse advice.
+`trino-best-practices` is a production-ready `SKILL.md` package for agents that need to review Trino SQL, read Trino plans, and troubleshoot Hive and Iceberg workloads without giving generic warehouse advice. It also includes Lakehouse boundary guidance so agents do not fake uniform semantics across table types.
 
 ## What problems it solves
 
@@ -9,6 +9,7 @@
 - Join regressions caused by wrong distribution or row explosion
 - Confusion between Trino engine behavior and connector behavior
 - Weak reviews of Hive and Iceberg table/query design
+- Bad Lakehouse advice that ignores the underlying table type
 - Blind tuning of session properties before reading the plan
 
 ## What is included
@@ -18,6 +19,11 @@
 - `metadata.json`: versioned package metadata and official references
 - `rules/`: atomic Trino rules with examples and official docs links
 
+Lakehouse note:
+
+- Hive-backed and Iceberg-backed Lakehouse tables are covered through the Hive and Iceberg rule sets.
+- Delta-backed and Hudi-backed Lakehouse tables are only covered at the connector-boundary level in this package.
+
 ## Trigger phrases
 
 - "Optimize this Trino query"
@@ -25,6 +31,7 @@
 - "Why is partition pruning not happening?"
 - "Is dynamic filtering helping here?"
 - "Review this Trino Iceberg table design"
+- "Review this Lakehouse query and tell me whether it is Hive or Iceberg underneath"
 - "Should I force broadcast join in Trino?"
 - "Why is this Hive table scanning so much data?"
 

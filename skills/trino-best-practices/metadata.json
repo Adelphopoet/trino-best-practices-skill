@@ -5,7 +5,7 @@
   "date": "2026-04-08",
   "license": "Apache-2.0",
   "trinoVersion": "Current documentation baseline: 480",
-  "abstract": "Atomic, review-first best practices for Trino SQL, plan analysis, connector-aware tuning, and Hive/Iceberg/Lakehouse troubleshooting. The package teaches agents to read plans first, preserve pushdown and pruning, reason about dynamic filtering and join distribution, and separate engine behavior from connector-specific behavior.",
+  "abstract": "Atomic, review-first best practices for Trino SQL, plan analysis, connector-aware tuning, and Hive/Iceberg troubleshooting. The package teaches agents to read plans first, preserve pushdown and pruning, reason about dynamic filtering and join distribution, and separate engine behavior from connector-specific behavior. For Lakehouse, it adds connector-boundary guidance and routes full advice only when the underlying table type is Hive or Iceberg.",
   "references": [
     {
       "name": "Trino documentation root",

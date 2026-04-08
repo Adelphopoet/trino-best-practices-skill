@@ -1,6 +1,6 @@
 ---
 name: trino-best-practices
-description: MUST USE when reviewing Trino SQL, EXPLAIN plans, catalog or session settings, or Hive/Iceberg/Lakehouse behavior so recommendations stay connector-aware and Trino-specific.
+description: MUST USE when reviewing Trino SQL, EXPLAIN plans, optimizer behavior, or performance-related session settings so recommendations stay connector-aware and Trino-specific, especially for Hive and Iceberg workloads.
 license: Apache-2.0
 metadata:
   author: Codex
@@ -17,7 +17,7 @@ This skill teaches an agent how to review Trino SQL, read Trino execution plans,
 - Reviews `EXPLAIN`, `EXPLAIN ANALYZE`, and `EXPLAIN (TYPE IO)` output.
 - Reviews session and catalog choices only after plan evidence exists.
 - Distinguishes engine behavior from connector behavior.
-- Covers Hive, Iceberg, and Lakehouse specifics.
+- Covers Hive and Iceberg specifics, plus Lakehouse connector boundary rules.
 
 ## IMPORTANT: How to apply this skill
 
@@ -30,6 +30,7 @@ Before giving guidance, the agent MUST:
 5. Prefer Trino- and connector-specific guidance over generic database advice.
 6. State uncertainty explicitly when Trino version, connector behavior, or table design is unclear.
 7. Separate recommendations into the correct layer: SQL shape, table design, file layout, catalog config, or session config.
+8. If a Lakehouse table is `DELTA` or `HUDI`, do not pretend this package has full connector-specific coverage; apply the boundary rule, keep advice limited to generic SQL/plan/session evidence, and call out the missing connector-specific context.
 
 ## Review Procedures
 
@@ -88,7 +89,13 @@ Read connector rules before proposing fixes:
 
 - Hive: `rules/hive-dynamic-filtering.md`, `rules/hive-partition-pruning.md`, `rules/hive-file-format-pruning.md`
 - Iceberg: `rules/iceberg-partitioning-transform-awareness.md`, `rules/iceberg-metadata-tables.md`, `rules/iceberg-snapshot-operations.md`, `rules/iceberg-file-size-and-layout.md`
-- Lakehouse: `rules/lakehouse-connector-boundaries.md`
+- Lakehouse wrapper: `rules/lakehouse-connector-boundaries.md`
+
+Routing:
+
+- If the Lakehouse table type is `HIVE`, apply the Hive rules.
+- If the Lakehouse table type is `ICEBERG`, apply the Iceberg rules.
+- If the Lakehouse table type is `DELTA` or `HUDI`, apply only `rules/lakehouse-connector-boundaries.md` plus generic SQL / plan / session rules from this package, and state that deeper connector-specific guidance is out of scope for this skill.
 
 Check for:
 
@@ -96,6 +103,7 @@ Check for:
 - Metadata-table evidence instead of guesses
 - File-count / file-size pathologies
 - Table type confusion inside the Lakehouse connector
+- Unsupported connector-specific claims for Lakehouse `DELTA` / `HUDI` tables
 
 ### For execution / configuration reviews
 
@@ -171,9 +179,10 @@ Use this skill when the prompt contains things like:
 - "Why is partition pruning not happening?"
 - "Is dynamic filtering helping here?"
 - "Should this join be broadcast or partitioned?"
-- "Review this Hive / Iceberg / Lakehouse query"
+- "Review this Hive / Iceberg query"
+- "Review this Lakehouse query and identify whether it is Hive or Iceberg"
 - "Why is this Trino query slow?"
-- "Should I change retry policy / spill / memory settings?"
+- "Should I change retry policy / spill / memory settings for this slow query?"
 
 ## Full compiled document
 
