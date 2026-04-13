@@ -1,0 +1,4 @@
+interface:
+  display_name: "Trino Best Practices"
+  short_description: "Review and optimize Trino SQL and plans"
+  default_prompt: "Use $trino-best-practices to review this Trino query or plan for pushdown, joins, connector behavior, and evidence-based tuning."

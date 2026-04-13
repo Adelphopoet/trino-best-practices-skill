@@ -16,6 +16,7 @@
 
 - `SKILL.md`: compact execution workflow for agents
 - `AGENTS.md`: compiled long-form reference manual
+- `agents/openai.yaml`: UI-facing skill metadata
 - `metadata.json`: versioned package metadata and official references
 - `rules/`: atomic Trino rules with examples and official docs links
 
